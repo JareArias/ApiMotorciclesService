@@ -1,11 +1,24 @@
 package com.motos.moto01.persistence.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "contact")
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_generator")
@@ -21,5 +34,5 @@ public class Contact {
     private String lastName;
 
     @Column(name = "creation_date") //fehca de creacion CreatedDate
-    private String creationDate;
+    private LocalDateTime creationDate;
 }
