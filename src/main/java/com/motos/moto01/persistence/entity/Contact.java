@@ -24,12 +24,10 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_generator")
     @SequenceGenerator(name = "contact_generator", allocationSize = 1)
     private Long id;
-
-    //@NotEmpty(message = "The name is required")
+    
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    //@NotEmpty(message = "The last name is required")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 

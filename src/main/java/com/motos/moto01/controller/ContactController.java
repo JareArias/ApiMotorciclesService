@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.motos.moto01.dto.ContactInDTO;
 import com.motos.moto01.service.ContactService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/contacts")
 public class ContactController {
@@ -44,7 +46,7 @@ public class ContactController {
     }
 
     @PostMapping("/new")
-    private ResponseEntity<?> saveContact(@RequestBody ContactInDTO contactInDTO){
+    private ResponseEntity<?> saveContact(@Valid @RequestBody ContactInDTO contactInDTO){
         response.clear();
         this.contactService.saveContact(contactInDTO);
         response.put("message", "save contact succesfully");

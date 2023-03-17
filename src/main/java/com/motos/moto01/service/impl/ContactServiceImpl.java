@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.motos.moto01.dto.ContactInDTO;
+import com.motos.moto01.exception.NotFoundException;
 import com.motos.moto01.mapper.ContacInDTOToContac;
 import com.motos.moto01.persistence.entity.Contact;
 import com.motos.moto01.persistence.repository.ContactRepository;
@@ -23,7 +24,9 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public Contact geContactById(Long id) {
-      return this.contactRepository.findById(id).orElse(null);
+      return this.contactRepository.findById(id).orElseThrow(
+                () ->   new NotFoundException("Contact no found")
+      );
     }
 
     @Override
@@ -40,14 +43,18 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public void updateContact(Long id, ContactInDTO contactInDTO) {
-        Contact contact = this.contactRepository.findById(id).orElse(null);
+        Contact contact = this.contactRepository.findById(id).orElseThrow(
+            () ->   new NotFoundException("Contact no found")
+      );
         this.contacInDTOToContac.update(contactInDTO, contact);
         this.contactRepository.save(contact);
     }
 
     @Override
     public void deletePersonById(Long id) {
-        Contact contact = this.contactRepository.findById(id).orElse(null);
+        Contact contact = this.contactRepository.findById(id).orElseThrow(
+            () ->   new NotFoundException("Contact no found")
+      );
         this.contactRepository.delete(contact);
         //this.contactRepository.deleteById(id);
     }
